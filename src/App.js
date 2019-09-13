@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { Component, Fragment } from 'react'
+import { Header, Footer } from './Components/Layouts/index'
+import Exercises from './Components/Exercises/Exercises'
 
-const App = (props) => {
-  return (
-    <div>
-      
-    </div>
-  )
+class App extends Component {
+  render() {
+    return (
+      <Fragment>
+        <Header />
+
+        <Exercises />
+
+        <Footer />
+      </Fragment>
+    )
+  }
 }
 
 export default App;
