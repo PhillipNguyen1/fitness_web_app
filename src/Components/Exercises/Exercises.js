@@ -9,47 +9,56 @@ const styles = {
     marginTop: 10,
     marginBottom: 10,
     height: 500,
-    overflow: 'auto'
+    overflow: "auto"
   }
 };
 
 // Array of arrays of categories passed down as props
-const Exercises = ({ exercises }) => {
+const Exercises = ({
+  exercises,
+  category,
+  onSelect,
+  exercise: {
+    id,
+    title = "Welcome!",
+    description = "Please select an exercise from the list on the left."
+  }
+}) => {
   return (
     <Grid container>
-
       {/* Left Pane */}
       <Grid item sm>
         <Paper style={styles.Paper}>
           {/* Iterate through array and destructure every element */}
           {/* First index is categories, second index is the array of exercises */}
-          {exercises.map(([group, exercises], index) => (
-            <Fragment key={index}>
-              <Typography variant="h6" style={{ textTransform: "capitalize" }} >
-                {group}
-              </Typography>
-              <List component="ul">
-                {/* Iterates through exercise for muscle group */}
-                {exercises.map(({ title }, index) => (
-                  <ListItem button key={index}>
-                    <ListItemText primary={title} />
-                  </ListItem>
-                ))}
-              </List>
-            </Fragment>
-          ))}
+          {exercises.map(([group, exercises]) =>
+            !category || category === group ? (
+              <Fragment key={group}>
+                <Typography
+                  variant="h6"
+                  style={{ textTransform: "capitalize" }}
+                >
+                  {group}
+                </Typography>
+                <List component="ul">
+                  {/* Iterates through exercise for muscle group */}
+                  {exercises.map(({ id, title }) => (
+                    <ListItem button key={id} onClick={() => onSelect(id)}>
+                      <ListItemText primary={title} />
+                    </ListItem>
+                  ))}
+                </List>
+              </Fragment>
+            ) : null
+          )}
         </Paper>
       </Grid>
 
       {/* Right Pane */}
       <Grid item sm>
         <Paper style={styles.Paper}>
-          <Typography variant="h6">
-            Welcome
-          </Typography>
-          <Typography variant="subtitle1">
-            Please select an exercise from the list on the left.
-          </Typography>
+          <Typography variant="h4">{title}</Typography>
+          <Typography variant="subtitle1">{description}</Typography>
         </Paper>
       </Grid>
     </Grid>
