@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Paper, Tabs, Tab} from '@material-ui/core'
 
-const Footer = props => {
+const Footer = ({ muscles }) => {
   const [value, setValue] = useState(0);
 
   const onChange = (event, newvalue) => {
@@ -17,9 +17,11 @@ const Footer = props => {
         textColor="primary"
         centered
       >
-        <Tab label="Item One" />
-        <Tab label="Item Two" />
-        <Tab label="Item Three" />
+        
+        <Tab label="All" />
+        {muscles.map((group, index) => (
+          <Tab label={group} key={index} />
+        ))}
       </Tabs>
     </Paper>
   );
