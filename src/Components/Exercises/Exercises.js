@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Grid, Paper, Typography, List } from "@material-ui/core";
 import { ListItem, ListItemText } from "@material-ui/core";
 
+// css styling
 const styles = {
   Paper: {
     padding: 20,
@@ -12,19 +13,25 @@ const styles = {
   }
 };
 
+// Array of arrays of categories passed down as props
 const Exercises = ({ exercises }) => {
   return (
     <Grid container>
+
+      {/* Left Pane */}
       <Grid item sm>
         <Paper style={styles.Paper}>
-          {exercises.map(([group, exercises]) => (
-            <Fragment>
-              <Typography variant="h6" style={{ textTransform: "capitalize" }}>
+          {/* Iterate through array and destructure every element */}
+          {/* First index is categories, second index is the array of exercises */}
+          {exercises.map(([group, exercises], index) => (
+            <Fragment key={index}>
+              <Typography variant="h6" style={{ textTransform: "capitalize" }} >
                 {group}
               </Typography>
               <List component="ul">
-                {exercises.map(({ title }) => (
-                  <ListItem button>
+                {/* Iterates through exercise for muscle group */}
+                {exercises.map(({ title }, index) => (
+                  <ListItem button key={index}>
                     <ListItemText primary={title} />
                   </ListItem>
                 ))}
@@ -34,6 +41,7 @@ const Exercises = ({ exercises }) => {
         </Paper>
       </Grid>
 
+      {/* Right Pane */}
       <Grid item sm>
         <Paper style={styles.Paper}>
           <Typography variant="h6">

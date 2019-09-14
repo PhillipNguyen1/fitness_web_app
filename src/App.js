@@ -31,7 +31,7 @@ class App extends Component {
 
   render() {
     const exercises = this.getExerciseByMuscles();
-
+    console.log(exercises);
     return (
       <Fragment>
         <Header />
